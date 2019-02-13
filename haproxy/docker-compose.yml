@@ -1,0 +1,36 @@
+# This will start a haproxy and four nginx web services. haproxy will act as a loadbalancer.
+# Authors: franitel@hotmail.com
+
+haproxy:
+    image: haproxy:1.6
+    volumes:
+        - ./haproxy:/haproxy-override
+        - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    links:
+        - nginx1
+        - nginx2
+        - nginx3
+        - nginx4
+    ports:
+        - "80:80"
+        - "70:70"
+nginx1:
+    image: franitel/nginx-hostname
+    build: ./web
+    expose:
+        - 80
+
+nginx2:
+    build: ./web
+    expose:
+        - 80
+
+nginx3:
+    build: ./web
+    expose:
+        - 80
+nginx4:
+    build: ./web
+    expose:
+        - 80
+
