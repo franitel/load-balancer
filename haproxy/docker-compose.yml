@@ -15,7 +15,6 @@ haproxy:
         - "80:80"
         - "70:70"
 nginx1:
-    image: franitel/nginx-hostname
     build: ./web
     expose:
         - 80
